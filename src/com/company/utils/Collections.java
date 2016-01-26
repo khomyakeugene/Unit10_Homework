@@ -11,17 +11,4 @@ public class Collections {
                 .stream()
                 .forEach(p -> Utils.printMessage(p.toString()));
     }
-
-    public static void printListAsTable(AbstractCollection list, String header, int width) {
-        // Header
-        Table.printTableHeader(header, width);
-
-        // The data
-        list
-                .stream()
-                .forEach(p -> Table.printTableRow(p.toString(), width));
-
-        // Footer
-        Table.printTableRowBorder(width);
-    }
 }

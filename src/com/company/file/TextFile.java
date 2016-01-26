@@ -3,19 +3,19 @@ package com.company.file;
 import com.company.caesar.Caesar;
 import com.company.utils.Utils;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.io.File;
 
 /**
  * Created by Yevgen on 25.01.2016 as a part of the project "Unit10_Homework".
  */
 public class TextFile {
-    public final static String CANNOT_OPEN_FILE_TO_WRITE_PATTERN = "Cannot open com.company.file \"%s\" to write!";
-    public final static String CANNOT_CLOSE_FILE_PATTERN = "Cannot close com.company.file \"%s\"!";
-    public final static String CANNOT_WRITE_ROW_TO_FILE_PATTERN = "Cannot write row \"%s\" to com.company.file \"%s\"!";
+    public final static String CANNOT_OPEN_FILE_TO_WRITE_PATTERN = "Cannot open file \"%s\" to write!";
+    public final static String CANNOT_CLOSE_FILE_PATTERN = "Cannot close file \"%s\"!";
+    public final static String CANNOT_WRITE_ROW_TO_FILE_PATTERN = "Cannot write row \"%s\" to file \"%s\"!";
+    public final static String CANNOT_OPEN_FILE_TO_READ_PATTERN = "Cannot open file \"%s\" to read!";
+    public final static int DEFAULT_SHIFT = 20;
 
     public static String getAbsoluteFileName(String fileName) {
         String fullFileName;
@@ -49,8 +49,8 @@ public class TextFile {
             if (bufferedWriter != null) {
                 // Store filename with absolute path
                 fullFileName = getAbsoluteFileName(fileName);
-                
-                // Save data to com.company.file
+
+                // Save data to file
                 for (Object object : list) {
                     string = object.toString();
                     try {
@@ -67,7 +67,7 @@ public class TextFile {
                 }
             }
         } finally {
-            // Close com.company.file
+            // Close file
             if (bufferedWriter != null) {
                 try {
                     bufferedWriter.close();
@@ -81,7 +81,7 @@ public class TextFile {
             }
         }
 
-        // Return absolute path as a sign that com.company.file has been successfully saved
+        // Return absolute path as a sign that file has been successfully saved
         return fullFileName;
     }
 
@@ -90,6 +90,46 @@ public class TextFile {
     }
 
     public static String writeEncodedUsingDefaultShiftListToFile(String fileName, List list) {
-        return writeEncodedListToFile(fileName, list, Caesar.DEFAULT_SHIFT);
+        return writeEncodedListToFile(fileName, list, DEFAULT_SHIFT);
+    }
+
+    public static ArrayList<String> readListFromFile(String fileName) {
+        ArrayList<String> resultList = new ArrayList<>();
+        BufferedReader bufferedReader = null;
+
+        try {
+            try {
+                bufferedReader = new BufferedReader(new FileReader(fileName));
+            } catch (FileNotFoundException e) {
+                Utils.printMessage(String.format(CANNOT_OPEN_FILE_TO_READ_PATTERN, fileName));
+                Utils.printMessage(e.getMessage());
+                bufferedReader = null;
+            }
+
+            // Read text data by lines
+            if (bufferedReader != null) {
+                bufferedReader.lines().forEach(resultList::add);
+            }
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    // Indicate error message
+                    Utils.printMessage(String.format(CANNOT_CLOSE_FILE_PATTERN, fileName));
+                    Utils.printMessage(e.getMessage());
+                }
+            }
+        }
+
+        return resultList;
+    }
+
+    public static ArrayList<String> readDecodedListFromFile(String fileName, int shift) {
+        return Caesar.decodeArrayList(readListFromFile(fileName), shift);
+    }
+
+    public static ArrayList<String> readDecodedUsingDefaultShiftListToFile(String fileName) {
+        return readDecodedListFromFile(fileName, DEFAULT_SHIFT);
     }
 }

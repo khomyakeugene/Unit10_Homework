@@ -10,7 +10,6 @@ public class Caesar {
     public final static int LOWER_BOUND = 32;
     public final static int UPPER_BOUND = 127;
     public final static int DIVIDER = UPPER_BOUND - LOWER_BOUND + 1;
-    public final static int DEFAULT_SHIFT = 10;
 
     public static char[] encodeChars(char[] chars, int shift) {
         for (int i=0; i < chars.length; i++) {
@@ -53,31 +52,27 @@ public class Caesar {
         return new String(decodeChars(chars, shift));
     }
 
-    public static ArrayList encodeArrayList(List sourceList, int shift) {
-        ArrayList resultList = new ArrayList<>();
+    public static ArrayList<String> encodeArrayList(List sourceList, int shift) {
+        ArrayList<String> resultList = new ArrayList<>();
 
-        sourceList
-                .stream()
-                .forEach(f -> resultList.add(encodeString(f.toString(), shift)));
-
-        return resultList;
-    }
-
-    public static ArrayList encodeArrayListUsingDefaultShift(List sourceData) {
-        return encodeArrayList(sourceData, DEFAULT_SHIFT);
-    }
-
-    public static ArrayList decodeArrayList(List sourceList, int shift) {
-        ArrayList resultList = new ArrayList<>();
-
-        sourceList
-                .stream()
-                .forEach(f -> resultList.add(decodeString(f.toString(), shift)));
+        if (sourceList != null) {
+            sourceList
+                    .stream()
+                    .forEach(f -> resultList.add(encodeString(f.toString(), shift)));
+        }
 
         return resultList;
     }
 
-    public static ArrayList decodeArrayListUsingDefaultShift(List sourceData) {
-        return decodeArrayList(sourceData, DEFAULT_SHIFT);
+    public static ArrayList<String> decodeArrayList(List sourceList, int shift) {
+        ArrayList<String> resultList = new ArrayList<>();
+
+        if (sourceList != null) {
+            sourceList
+                    .stream()
+                    .forEach(f -> resultList.add(decodeString(f.toString(), shift)));
+        }
+
+        return resultList;
     }
 }
