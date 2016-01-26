@@ -14,7 +14,6 @@ public class TextFile {
     public final static String CANNOT_OPEN_FILE_TO_WRITE_PATTERN = "Cannot open file \"%s\" to write!";
     public final static String CANNOT_CLOSE_FILE_PATTERN = "Cannot close file \"%s\"!";
     public final static String CANNOT_WRITE_ROW_TO_FILE_PATTERN = "Cannot write row \"%s\" to file \"%s\"!";
-    public final static String FILE_HAS_BEEN_SUCCESSFULLY_SAVED_PATTERN = "File \"%s\" has been successfully saved";
 
     public static void writeListToFile(String fileName, List list) {
         BufferedWriter bufferedWriter = null;

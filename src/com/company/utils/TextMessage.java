@@ -9,7 +9,7 @@ public class TextMessage {
     public final static String THEN_ENTER_EMPTY_ROW_WHEN_YOU_WANT_TO_STOP_INPUT_MESSAGE =
             "then enter empty row when you want to stop input";
 
-    public static ArrayList readInputText(String Invitation) {
+    public static ArrayList<String> readInputText(String Invitation) {
         ArrayList<String> arrayList = new ArrayList<>();
         String string;
 
@@ -27,7 +27,7 @@ public class TextMessage {
         return arrayList;
     }
 
-    public static ArrayList readNotEmptyInputText(String Invitation) {
+    public static ArrayList<String> readNotEmptyInputText(String Invitation) {
         ArrayList<String> arrayList;
 
         do {

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class TestFileProcessing {
     public final static String INPUT_TEXT_MESSAGE = "Please, input text (at least, one row)";
     public final static String INPUT_FILENAME_MESSAGE = "Please, input filename:";
+    public final static String FILE_HAS_BEEN_SUCCESSFULLY_SAVED_PATTERN = "File \"%s\" has been successfully saved";
 
     private String fileName;
     private ArrayList<String> text;
