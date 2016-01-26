@@ -1,11 +1,14 @@
 package com.company;
 
+import com.company.tests.TestFileProcessing;
+
 public class Main {
     public static void main(String[] args) {
-        demonstrateData();
+        demonstrate();
     }
 
-    public static void demonstrateData() {
+    public static void demonstrate() {
+        new TestFileProcessing().demonstrate();
     }
 }
 

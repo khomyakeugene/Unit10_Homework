@@ -74,10 +74,8 @@ public class Utils {
         return result;
     }
 
-    public static String readInputString(String enterMessageInvitation) {
+    public static String readInputString() {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-
-        printMessage(enterMessageInvitation);
 
         do {
             try {
@@ -86,6 +84,22 @@ public class Utils {
                 printMessage(MessageFormat.format(PLEASE_REPEAT_ENTER, e.getClass().getName(), e.getMessage()));
             }
         } while (true);
+    }
+
+
+    public static String readInputString(String invitation) {
+        printMessage(invitation);
+        return readInputString();
+    }
+
+    public static String readNotInputInputString(String invitation) {
+        String string;
+
+        do {
+            string = readInputString(invitation);
+        } while (string.isEmpty());
+
+        return string;
     }
 
 
