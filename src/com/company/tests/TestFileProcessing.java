@@ -38,14 +38,18 @@ public class TestFileProcessing {
 
     public void processData() {
         // Write to file
-        TextFile.writeListToFile(getFileName(), getText());
-        // Read from file
+        String fullFileName = TextFile.writeListToFile(getFileName(), getText());
+        if (fullFileName != null && !fullFileName.isEmpty()) {
+            Utils.printMessage(String.format(FILE_HAS_BEEN_SUCCESSFULLY_SAVED_PATTERN, fullFileName));
+        
+            // Read from file
 
-        // Show "source" text
+            // Show "source" text
 
-        // Encode text
+            // Encode text
 
-        // Show encoded text
+            // Show encoded text
+        }
     }
 
 
