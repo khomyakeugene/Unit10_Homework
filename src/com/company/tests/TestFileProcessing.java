@@ -2,7 +2,7 @@ package com.company.tests;
 
 import com.company.utils.TextMessage;
 import com.company.utils.Utils;
-import file.TextFile;
+import com.company.file.TextFile;
 
 import java.util.ArrayList;
 
@@ -37,12 +37,12 @@ public class TestFileProcessing {
 
 
     public void processData() {
-        // Write to file
+        // Write to com.company.file
         String fullFileName = TextFile.writeListToFile(getFileName(), getText());
         if (fullFileName != null && !fullFileName.isEmpty()) {
             Utils.printMessage(String.format(FILE_HAS_BEEN_SUCCESSFULLY_SAVED_PATTERN, fullFileName));
         
-            // Read from file
+            // Read from com.company.file
 
             // Show "source" text
 

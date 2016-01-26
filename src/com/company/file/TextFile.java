@@ -1,4 +1,4 @@
-package file;
+package com.company.file;
 
 import com.company.utils.Utils;
 
@@ -12,12 +12,12 @@ import java.io.File;
  * Created by Yevgen on 25.01.2016 as a part of the project "Unit10_Homework".
  */
 public class TextFile {
-    public final static String CANNOT_OPEN_FILE_TO_WRITE_PATTERN = "Cannot open file \"%s\" to write!";
-    public final static String CANNOT_CLOSE_FILE_PATTERN = "Cannot close file \"%s\"!";
-    public final static String CANNOT_WRITE_ROW_TO_FILE_PATTERN = "Cannot write row \"%s\" to file \"%s\"!";
+    public final static String CANNOT_OPEN_FILE_TO_WRITE_PATTERN = "Cannot open com.company.file \"%s\" to write!";
+    public final static String CANNOT_CLOSE_FILE_PATTERN = "Cannot close com.company.file \"%s\"!";
+    public final static String CANNOT_WRITE_ROW_TO_FILE_PATTERN = "Cannot write row \"%s\" to com.company.file \"%s\"!";
 
     public static String getAbsoluteFileName(String fileName) {
-        String fullFileName = fileName;
+        String fullFileName;
 
         File file = new File(fileName);
         try {
@@ -47,9 +47,9 @@ public class TextFile {
             // Write text data by lines
             if (bufferedWriter != null) {
                 // Store filename with absolute path
-                fullFileName = GetAbsoluteFileName(fileName);
+                fullFileName = getAbsoluteFileName(fileName);
                 
-                // Save data to file
+                // Save data to com.company.file
                 for (Object object : list) {
                     string = object.toString();
                     try {
@@ -66,7 +66,7 @@ public class TextFile {
                 }
             }
         } finally {
-            // Close file
+            // Close com.company.file
             if (bufferedWriter != null) {
                 try {
                     bufferedWriter.close();
@@ -79,8 +79,8 @@ public class TextFile {
                 }
             }
         }
-    }
 
-    // Return absolute path as a sign that file has been successfully saved
-    return fullFileName;
+        // Return absolute path as a sign that com.company.file has been successfully saved
+        return fullFileName;
+    }
 }
