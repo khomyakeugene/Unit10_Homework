@@ -1,5 +1,6 @@
 package com.company.file;
 
+import com.company.caesar.Caesar;
 import com.company.utils.Utils;
 
 import java.io.BufferedWriter;
@@ -82,5 +83,13 @@ public class TextFile {
 
         // Return absolute path as a sign that com.company.file has been successfully saved
         return fullFileName;
+    }
+
+    public static String writeEncodedListToFile(String fileName, List list, int shift) {
+        return writeListToFile(fileName, Caesar.encodeArrayList(list, shift));
+    }
+
+    public static String writeEncodedUsingDefaultShiftListToFile(String fileName, List list) {
+        return writeEncodedListToFile(fileName, list, Caesar.DEFAULT_SHIFT);
     }
 }

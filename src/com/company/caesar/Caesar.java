@@ -1,6 +1,7 @@
 package com.company.caesar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Yevgen on 23.01.2016 as a part of the project "Unit9_Homework".
@@ -52,7 +53,7 @@ public class Caesar {
         return new String(decodeChars(chars, shift));
     }
 
-    public static ArrayList encodeArrayList(ArrayList sourceList, int shift) {
+    public static ArrayList encodeArrayList(List sourceList, int shift) {
         ArrayList resultList = new ArrayList<>();
 
         sourceList
@@ -62,11 +63,11 @@ public class Caesar {
         return resultList;
     }
 
-    public static ArrayList encodeArrayListUsingDefaultShift(ArrayList sourceData) {
+    public static ArrayList encodeArrayListUsingDefaultShift(List sourceData) {
         return encodeArrayList(sourceData, DEFAULT_SHIFT);
     }
 
-    public static ArrayList decodeArrayList(ArrayList sourceList, int shift) {
+    public static ArrayList decodeArrayList(List sourceList, int shift) {
         ArrayList resultList = new ArrayList<>();
 
         sourceList
@@ -76,7 +77,7 @@ public class Caesar {
         return resultList;
     }
 
-    public static ArrayList decodeArrayListUsingDefaultShift(ArrayList sourceData) {
+    public static ArrayList decodeArrayListUsingDefaultShift(List sourceData) {
         return decodeArrayList(sourceData, DEFAULT_SHIFT);
     }
 }

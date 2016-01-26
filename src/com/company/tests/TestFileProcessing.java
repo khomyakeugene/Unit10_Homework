@@ -37,8 +37,7 @@ public class TestFileProcessing {
 
 
     public void processData() {
-        // Write to com.company.file
-        String fullFileName = TextFile.writeListToFile(getFileName(), getText());
+        String fullFileName = TextFile.writeEncodedUsingDefaultShiftListToFile(getFileName(), getText());
         if (fullFileName != null && !fullFileName.isEmpty()) {
             Utils.printMessage(String.format(FILE_HAS_BEEN_SUCCESSFULLY_SAVED_PATTERN, fullFileName));
         
