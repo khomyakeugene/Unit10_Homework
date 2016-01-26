@@ -30,7 +30,7 @@ public class TextFile {
         return fullFileName;   
     }
 
-    public static void writeListToFile(String fileName, List list) {
+    public static String writeListToFile(String fileName, List list) {
         BufferedWriter bufferedWriter = null;
         String string;
         String fullFileName = null;
