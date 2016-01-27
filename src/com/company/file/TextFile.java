@@ -68,7 +68,7 @@ public class TextFile {
             }
         } finally {
             // Close file
-            if (bufferedWriter != null) {
+            if (bufferedWriter != null) { //для красоты и упрощения можно использовать try-with-resources
                 try {
                     bufferedWriter.close();
                 } catch (IOException e) {

@@ -11,7 +11,8 @@ public class TextMessage {
 
     public static ArrayList<String> readInputText(String Invitation) {
         ArrayList<String> arrayList = new ArrayList<>();
-        String string;
+        String string; //если локальные переменные необходимо объявлять отдельно от присваивания значения,
+        //то делать это надо максимально близко к этому присваиванию.
 
         // Invitation to input
         Utils.printMessage(String.format("%s (%s):", Invitation, THEN_ENTER_EMPTY_ROW_WHEN_YOU_WANT_TO_STOP_INPUT_MESSAGE));
@@ -27,7 +28,7 @@ public class TextMessage {
         return arrayList;
     }
 
-    public static ArrayList<String> readNotEmptyInputText(String Invitation) {
+    public static ArrayList<String> readNotEmptyInputText(String Invitation) {//название переменной с маленькой
         ArrayList<String> arrayList;
 
         do {
