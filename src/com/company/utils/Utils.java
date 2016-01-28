@@ -18,7 +18,7 @@ public class Utils {
     }
 
     public static String readInputString() {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in)); //а закрывать стримы надо?
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in)); // System.in should never be closed!
 
         do {
             try {
@@ -35,8 +35,7 @@ public class Utils {
         return readInputString();
     }
 
-    public static String readNotInputInputString(String invitation) { //—транное название, что означает?
-        //и еще мне кажетс€, что этот метод дублирует функционал, который был сделан дл€ TextMessage
+    public static String readNotEmptyInputString(String invitation) {
         String string;
 
         do {

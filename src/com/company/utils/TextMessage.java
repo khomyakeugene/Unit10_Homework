@@ -9,14 +9,13 @@ public class TextMessage {
     public final static String THEN_ENTER_EMPTY_ROW_WHEN_YOU_WANT_TO_STOP_INPUT_MESSAGE =
             "then enter empty row when you want to stop input";
 
-    public static ArrayList<String> readInputText(String Invitation) {
+    public static ArrayList<String> readInputText(String invitation) {
         ArrayList<String> arrayList = new ArrayList<>();
-        String string; //если локальные переменные необходимо объявлять отдельно от присваивания значения,
-        //то делать это надо максимально близко к этому присваиванию.
 
         // Invitation to input
-        Utils.printMessage(String.format("%s (%s):", Invitation, THEN_ENTER_EMPTY_ROW_WHEN_YOU_WANT_TO_STOP_INPUT_MESSAGE));
+        Utils.printMessage(String.format("%s (%s):", invitation, THEN_ENTER_EMPTY_ROW_WHEN_YOU_WANT_TO_STOP_INPUT_MESSAGE));
         // Input text until the "empty row"
+        String string;
         do {
             string = Utils.readInputString();
             if(string.isEmpty()) {
@@ -28,11 +27,11 @@ public class TextMessage {
         return arrayList;
     }
 
-    public static ArrayList<String> readNotEmptyInputText(String Invitation) {//название переменной с маленькой
+    public static ArrayList<String> readNotEmptyInputText(String invitation) {
         ArrayList<String> arrayList;
 
         do {
-            arrayList = readInputText(Invitation);
+            arrayList = readInputText(invitation);
         } while (arrayList.size() == 0);
 
         return arrayList;

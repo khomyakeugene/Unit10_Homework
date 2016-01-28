@@ -52,7 +52,7 @@ public class Caesar {
         return new String(decodeChars(chars, shift));
     }
 
-    public static ArrayList<String> encodeArrayList(List sourceList, int shift) {
+    public static ArrayList<String> encodeList(List sourceList, int shift) {
         ArrayList<String> resultList = new ArrayList<>();
 
         if (sourceList != null) {
@@ -64,7 +64,7 @@ public class Caesar {
         return resultList;
     }
 
-    public static ArrayList<String> decodeArrayList(List sourceList, int shift) {
+    public static ArrayList<String> decodeList(List sourceList, int shift) {
         ArrayList<String> resultList = new ArrayList<>();
 
         if (sourceList != null) {

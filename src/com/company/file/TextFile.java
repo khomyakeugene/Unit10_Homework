@@ -24,7 +24,7 @@ public class TextFile {
         try {
              fullFileName = file.getAbsolutePath();
         } catch (SecurityException e) {
-             // If it is impossible to get absolute path, interpert source filename as an absolute one
+             // If it is impossible to get absolute path, interpret source filename as an absolute one
              fullFileName = fileName;
         }
 
@@ -86,7 +86,7 @@ public class TextFile {
     }
 
     public static String writeEncodedListToFile(String fileName, List list, int shift) {
-        return writeListToFile(fileName, Caesar.encodeArrayList(list, shift));
+        return writeListToFile(fileName, Caesar.encodeList(list, shift));
     }
 
     public static String writeEncodedUsingDefaultShiftListToFile(String fileName, List list) {
@@ -126,7 +126,7 @@ public class TextFile {
     }
 
     public static ArrayList<String> readDecodedListFromFile(String fileName, int shift) {
-        return Caesar.decodeArrayList(readListFromFile(fileName), shift);
+        return Caesar.decodeList(readListFromFile(fileName), shift);
     }
 
     public static ArrayList<String> readDecodedUsingDefaultShiftListToFile(String fileName) {

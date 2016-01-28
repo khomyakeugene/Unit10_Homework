@@ -36,7 +36,7 @@ public class TestFileProcessing {
 
     public void initData() {
         text = TextMessage.readNotEmptyInputText(INPUT_TEXT_MESSAGE);
-        setFileName(Utils.readNotInputInputString(INPUT_FILENAME_MESSAGE));
+        setFileName(Utils.readNotEmptyInputString(INPUT_FILENAME_MESSAGE));
     }
 
     public void processData() {
