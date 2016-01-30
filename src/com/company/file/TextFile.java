@@ -32,10 +32,11 @@ public class TextFile {
     }
 
     public static String writeListToFile(String fileName, List list) {
-        BufferedWriter bufferedWriter = null;
-        String string;
         String fullFileName = null;
+        BufferedWriter bufferedWriter = null;
 
+        // In this method we intentionally do not use try-with-resources just to have the possibility to handle
+        // different input/output errors
         try {
             try {
                 bufferedWriter = new BufferedWriter(new FileWriter(fileName));
@@ -51,6 +52,7 @@ public class TextFile {
                 fullFileName = getAbsoluteFileName(fileName);
 
                 // Save data to file
+                String string;
                 for (Object object : list) {
                     string = object.toString();
                     try {
@@ -68,7 +70,7 @@ public class TextFile {
             }
         } finally {
             // Close file
-            if (bufferedWriter != null) { //для красоты и упрощения можно использовать try-with-resources
+            if (bufferedWriter != null) {
                 try {
                     bufferedWriter.close();
                 } catch (IOException e) {
@@ -85,11 +87,11 @@ public class TextFile {
         return fullFileName;
     }
 
-    public static String writeEncodedListToFile(String fileName, List list, int shift) {
+    public static String writeEncodedListToFile(String fileName, List<? extends Object>  list, int shift) {
         return writeListToFile(fileName, Caesar.encodeList(list, shift));
     }
 
-    public static String writeEncodedUsingDefaultShiftListToFile(String fileName, List list) {
+    public static String writeEncodedUsingDefaultShiftListToFile(String fileName, List<? extends Object> list) {
         return writeEncodedListToFile(fileName, list, DEFAULT_SHIFT);
     }
 
