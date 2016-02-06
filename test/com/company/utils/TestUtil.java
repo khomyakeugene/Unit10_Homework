@@ -2,7 +2,11 @@ package com.company.utils;
 
 import org.junit.Assert;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -28,5 +32,41 @@ public class TestUtil {
         }
 
         return new ArrayList<>(list);
+    }
+
+
+    public static String saveToFile(String fileName, List<? extends Object> list) {
+        fileName = new File(fileName).getAbsolutePath();
+
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
+            list.
+                    stream().
+                    forEach(p -> {
+                        try {
+                            bufferedWriter.write(p.toString());
+                            bufferedWriter.newLine();
+                        } catch  (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return fileName;
+    }
+
+
+    public static boolean deleteFile(String fileName) {
+        boolean result;
+
+        try {
+            result = Files.deleteIfExists(FileSystems.getDefault().getPath("", new File(fileName).getAbsolutePath()));
+
+        } catch (IOException e) {
+            result = false;
+        }
+
+        return result;
     }
 }

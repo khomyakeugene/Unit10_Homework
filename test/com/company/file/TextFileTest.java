@@ -2,6 +2,7 @@ package com.company.file;
 
 import com.company.caesar.Caesar;
 import com.company.utils.TestUtil;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -17,20 +18,29 @@ import static org.junit.Assert.assertEquals;
 public class TextFileTest {
     final static int DEFAULT_SHIFT = 30;
 
-    final static String FILENAME_FOR_READING = "read.txt";
-    final static String FILENAME_FOR_WRITING = "write.txt";
+    static private String readingPlainTextFileName = "plain_read.txt";
+    static private String readingCodeTextFileName = "code_read.txt";
+    static private String readingDefaultCodeTextFileName = "code_default_read.txt";
+    static private String writingFileName = "write.txt";
     private static ArrayList<String> writingText;
+    private static ArrayList<String> readingText;
 
     private static void prepareTestDataForWriting() {
         writingText = new ArrayList<>();
-
         writingText.add("This is an example");
         writingText.add("of a file writing");
-        writingText.add("and a file reading");
     }
 
     private static void prepareTestDataForReading() {
+        readingText = new ArrayList<>();
+        readingText.add("This is an example");
+        readingText.add("of a file reading");
 
+        readingPlainTextFileName = TestUtil.saveToFile(readingPlainTextFileName, readingText);
+        readingCodeTextFileName =
+                TestUtil.saveToFile(readingCodeTextFileName, Caesar.encodeList(readingText, DEFAULT_SHIFT));
+        readingDefaultCodeTextFileName =
+                TestUtil.saveToFile(readingDefaultCodeTextFileName, Caesar.encodeList(readingText, TextFile.DEFAULT_SHIFT));
     }
 
     @BeforeClass
@@ -39,52 +49,65 @@ public class TextFileTest {
         prepareTestDataForReading();
     }
 
-    @Test
-    public void testGetAbsoluteFileName() throws Exception {
-        final String result = TextFile.getAbsoluteFileName(FILENAME_FOR_WRITING);
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+        TestUtil.deleteFile(writingFileName);
+        TestUtil.deleteFile(readingPlainTextFileName);
+        TestUtil.deleteFile(readingCodeTextFileName);
+        TestUtil.deleteFile(readingDefaultCodeTextFileName);
+    }
 
-        final String expected = new File(FILENAME_FOR_WRITING).getAbsolutePath();
+    @Test  (timeout = 1000)
+    public void testGetAbsoluteFileName() throws Exception {
+        final String result = TextFile.getAbsoluteFileName(writingFileName);
+
+        final String expected = new File(writingFileName).getAbsolutePath();
         assertEquals(expected, result);
     }
 
-    @Test
+    @Test  (timeout = 1000)
     public void testWriteListToFile() throws Exception {
-        final String fileName = TextFile.writeListToFile(FILENAME_FOR_WRITING, writingText);
+        final String fileName = TextFile.writeListToFile(writingFileName, writingText);
 
         ArrayList<String> result = TestUtil.readFromFile(fileName);
         assertArrayListEquals(writingText, result);
     }
 
 
-    @Test
+    @Test  (timeout = 1000)
     public void testWriteEncodedListToFile() throws Exception {
-        final String fileName = TextFile.writeEncodedListToFile(FILENAME_FOR_WRITING, writingText, DEFAULT_SHIFT);
+        final String fileName = TextFile.writeEncodedListToFile(writingFileName, writingText, DEFAULT_SHIFT);
 
         ArrayList<String> result = TestUtil.readFromFile(fileName);
         assertArrayListEquals(writingText, Caesar.decodeList(result, DEFAULT_SHIFT));
     }
 
-    @Test
+    @Test  (timeout = 1000)
     public void testWriteEncodedUsingDefaultShiftListToFile() throws Exception {
-        final String fileName = TextFile.writeEncodedUsingDefaultShiftListToFile(FILENAME_FOR_WRITING, writingText);
+        final String fileName = TextFile.writeEncodedUsingDefaultShiftListToFile(writingFileName, writingText);
 
         ArrayList<String> result = TestUtil.readFromFile(fileName);
         assertArrayListEquals(writingText, Caesar.decodeList(result, TextFile.DEFAULT_SHIFT));
     }
 
-    @Test
+    @Test  (timeout = 1000)
     public void testReadListFromFile() throws Exception {
-        // ArrayList<String> result = TextFile.readListFromFile()
+        ArrayList<String> result = TextFile.readListFromFile(readingPlainTextFileName);
 
+        assertArrayListEquals(readingText, result);
     }
 
-    @Test
+    @Test  (timeout = 1000)
     public void testReadDecodedListFromFile() throws Exception {
+        ArrayList<String> result = TextFile.readDecodedListFromFile(readingCodeTextFileName, DEFAULT_SHIFT);
 
+        assertArrayListEquals(readingText, result);
     }
 
-    @Test
+    @Test  (timeout = 1000)
     public void testReadDecodedUsingDefaultShiftListToFile() throws Exception {
+        ArrayList<String> result = TextFile.readDecodedUsingDefaultShiftListToFile(readingDefaultCodeTextFileName);
 
+        assertArrayListEquals(readingText, result);
     }
 }
