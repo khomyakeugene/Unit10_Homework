@@ -15,52 +15,61 @@ import static org.junit.Assert.assertEquals;
  * Created by Yevgen on 06.02.2016 as a part of the project "Unit10_Homework".
  */
 public class TextFileTest {
-    public final static String CANNOT_READ_FILE_PATTERN = "Cannot open read file \"%s\"!";
-
     final static int DEFAULT_SHIFT = 30;
-    final static String FILENAME = "test.txt";
-    private static ArrayList<String> text;
+
+    final static String FILENAME_FOR_READING = "read.txt";
+    final static String FILENAME_FOR_WRITING = "write.txt";
+    private static ArrayList<String> writingText;
+
+    private static void prepareTestDataForWriting() {
+        writingText = new ArrayList<>();
+
+        writingText.add("This is an example");
+        writingText.add("of a file writing");
+        writingText.add("and a file reading");
+    }
+
+    private static void prepareTestDataForReading() {
+
+    }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        text = new ArrayList<>();
-        
-        text.add("This is an example");
-        text.add("of a file writing");
-        text.add("and a file reading");
+        prepareTestDataForWriting();
+        prepareTestDataForReading();
     }
 
     @Test
     public void testGetAbsoluteFileName() throws Exception {
-        final String result = TextFile.getAbsoluteFileName(FILENAME);
+        final String result = TextFile.getAbsoluteFileName(FILENAME_FOR_WRITING);
 
-        final String expected = new File(FILENAME).getAbsolutePath();
+        final String expected = new File(FILENAME_FOR_WRITING).getAbsolutePath();
         assertEquals(expected, result);
     }
 
     @Test
     public void testWriteListToFile() throws Exception {
-        final String fileName = TextFile.writeListToFile(FILENAME, text);
+        final String fileName = TextFile.writeListToFile(FILENAME_FOR_WRITING, writingText);
 
         ArrayList<String> result = TestUtil.readFromFile(fileName);
-        assertArrayListEquals(text, result);
+        assertArrayListEquals(writingText, result);
     }
 
 
     @Test
     public void testWriteEncodedListToFile() throws Exception {
-        final String fileName = TextFile.writeEncodedListToFile(FILENAME, text, DEFAULT_SHIFT);
+        final String fileName = TextFile.writeEncodedListToFile(FILENAME_FOR_WRITING, writingText, DEFAULT_SHIFT);
 
         ArrayList<String> result = TestUtil.readFromFile(fileName);
-        assertArrayListEquals(text, Caesar.decodeList(result, DEFAULT_SHIFT));
+        assertArrayListEquals(writingText, Caesar.decodeList(result, DEFAULT_SHIFT));
     }
 
     @Test
     public void testWriteEncodedUsingDefaultShiftListToFile() throws Exception {
-        final String fileName = TextFile.writeEncodedUsingDefaultShiftListToFile(FILENAME, text);
+        final String fileName = TextFile.writeEncodedUsingDefaultShiftListToFile(FILENAME_FOR_WRITING, writingText);
 
         ArrayList<String> result = TestUtil.readFromFile(fileName);
-        assertArrayListEquals(text, Caesar.decodeList(result, TextFile.DEFAULT_SHIFT));
+        assertArrayListEquals(writingText, Caesar.decodeList(result, TextFile.DEFAULT_SHIFT));
     }
 
     @Test
