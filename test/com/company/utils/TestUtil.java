@@ -45,7 +45,7 @@ public class TestUtil {
                         try {
                             bufferedWriter.write(p.toString());
                             bufferedWriter.newLine();
-                        } catch  (IOException e) {
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
                     });
@@ -62,6 +62,7 @@ public class TestUtil {
 
         try {
             result = Files.deleteIfExists(FileSystems.getDefault().getPath("", new File(fileName).getAbsolutePath()));
+            //мое мнение по поводу паровозов ты знаешь))
 
         } catch (IOException e) {
             result = false;

@@ -18,14 +18,14 @@ import static org.junit.Assert.assertEquals;
 public class TextFileTest {
     final static int DEFAULT_SHIFT = 30;
 
-    static private String readingPlainTextFileName = "plain_read.txt";
+    static private String readingPlainTextFileName = "plain_read.txt";//порядок ключевых слов - модификаторов private static
     static private String readingCodeTextFileName = "code_read.txt";
     static private String readingDefaultCodeTextFileName = "code_default_read.txt";
     static private String writingFileName = "write.txt";
     private static ArrayList<String> writingText;
     private static ArrayList<String> readingText;
 
-    private static void prepareTestDataForWriting() {
+    private static void prepareTestDataForWriting() { //и все-таки приватные методы пишутся ниже вызывающего их метода.
         writingText = new ArrayList<>();
         writingText.add("This is an example");
         writingText.add("of a file writing");
@@ -49,7 +49,7 @@ public class TextFileTest {
         prepareTestDataForReading();
     }
 
-    @AfterClass
+    @AfterClass //этот метод пишется после всех тестовых методов
     public static void tearDownClass() throws Exception {
         TestUtil.deleteFile(writingFileName);
         TestUtil.deleteFile(readingPlainTextFileName);
@@ -59,7 +59,8 @@ public class TextFileTest {
 
     @Test  (timeout = 1000)
     public void testGetAbsoluteFileName() throws Exception {
-        final String result = TextFile.getAbsoluteFileName(writingFileName);
+        final String result = TextFile.getAbsoluteFileName(writingFileName);//глаза режет. Мы в ассерте вызываем сначала
+        //expected, потом result. В такой же последовательности хочется и подготавливать переменные с данными.
 
         final String expected = new File(writingFileName).getAbsolutePath();
         assertEquals(expected, result);
